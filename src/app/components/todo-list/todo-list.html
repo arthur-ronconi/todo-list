@@ -11,21 +11,37 @@
     To do!
   </button>
   @if (store.todos().length) {
-    <div class="w-full flex flex-col text-blue-900">
-      <p>Your todos</p>
-      <ul class="w-full flex flex-col gap-4">
+    <div class="w-full flex flex-col gap-4 text-blue-900">
+      <ul class="w-full flex flex-col gap-2">
         @for (todo of store.todos(); track todo.id) {
-          <li class="flex items-center gap-2" (click)="store.toggleTodo(todo.id)">
-            <input
-              type="checkbox"
-              [name]="todo.title"
-              [id]="todo.id"
-              [checked]="todo.completed"
-              class="appearance-none h-4 w-4 rounded-full border border-blue-500 bg-white checked:bg-blue-500"
-            />
-            <span [class]="{ 'line-through': todo.completed }">
-              {{ todo.title }}
-            </span>
+          <li class="flex items-center justify-between gap-2 bg-white rounded p-2 w-full">
+            <div class="flex items-center gap-2 relative" (click)="store.toggleTodo(todo.id)">
+              <input
+                type="checkbox"
+                [name]="todo.title"
+                [id]="todo.id"
+                [checked]="todo.completed"
+                class="peer appearance-none h-6 w-6 rounded-full border border-blue-500 bg-white checked:bg-blue-500"
+              />
+              <svg
+                class="absolute bottom-1/2 translate-y-1/2 left-0.5 w-5 h-5 text-white hidden peer-checked:block pointer-events-none"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="4"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+              <span [class]="{ 'line-through': todo.completed }">
+                {{ todo.title }}
+              </span>
+            </div>
+            <button class="h-6 w-6 text-red-500" (click)="removeTodo(todo.id)">
+              <span class="material-symbols-rounded"> close </span>
+            </button>
           </li>
         }
       </ul>

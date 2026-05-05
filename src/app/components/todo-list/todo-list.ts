@@ -20,4 +20,9 @@ export class TodoList {
   submitTodo(title: string) {
     this.store.addTodo(title);
   }
+
+  removeTodo(id: string) {
+    this.store.removeTodo(id);
+    console.log('removeTodo');
+  }
 }

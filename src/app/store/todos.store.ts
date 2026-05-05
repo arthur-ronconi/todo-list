@@ -38,5 +38,17 @@ export const TodoStore = signalStore(
         }),
       });
     },
+    removeTodo(id: string) {
+      patchState(store, (state) => {
+        const new_todos = [...state.todos];
+        new_todos.splice(
+          new_todos.findIndex((todo) => todo.id == id),
+          1,
+        );
+        return {
+          todos: new_todos,
+        };
+      });
+    },
   })),
 );
